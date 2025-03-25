@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/Customer")
 @RequiredArgsConstructor
+@CrossOrigin
 public class CustomerController {
 
     final CustomerService Service;
@@ -32,6 +33,24 @@ public class CustomerController {
     @PutMapping("/update-Customer")
     public void updateCustomer(@RequestBody Customer customer){
         Service.updateCustomer(customer);
+    }
+
+    @GetMapping("/search-id/{id}")
+    public Customer searchCustomer(@PathVariable Integer id){
+        return Service.SearchCustomerById(id);
+    }
+
+    @GetMapping("/search-name/{name}")
+    public List<Customer> findByName(@PathVariable String name){
+        return Service.SearchCustomerByName(name);
+    }
+
+    @GetMapping("/search-address/{address}")
+    public List<Customer> fineByAddress(@PathVariable String address){return Service.SearchCustomerByAddress(address);
+    }
+    @GetMapping("search-salary/{salary}")
+    public List<Customer> findBySalary(@PathVariable Double salary){
+        return Service.searchCustomerBySalary(salary);
     }
 
 }
